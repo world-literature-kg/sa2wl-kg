@@ -1,0 +1,44 @@
+@prefix : <https://purl.archive.org/domain/urwriters#> .
+@prefix cc: <http://web.resource.org/cc/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pim: <https://purl.archive.org/people-and-media#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix urb: <https://purl.archive.org/domain/urbooks#> .
+@prefix urw: <https://purl.archive.org/domain/urwriters#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <https://purl.archive.org/domain/urwriters#> .
+
+
+urb:5-season a urb:Edition;
+    rdfs:label "The Fifth Season" ;
+    frbr:isEmbodimentOf urb:1234 .
+
+urb:1234 a frbr:Expression;
+    prov:wasAttributedTo urw:jemisin .
+    
+urb:7890 a urb:Publication;
+    urb:hasParticipant urb:5-season, urw:jemisin, urw:mantovani, urb:author, urb:translator .
+    prov:wasDerivedFrom urb:goodreads .
+
+urw:jemisin a urw:Person;
+    rdfs:label "N. K. Jemisin" ;
+    dul:role urb:author .
+
+urw:jemisin a urw:Person;
+    rdfs:label "Alba Mantovani" ;
+    dul:role urb:translator .
+
+
+urb:goodreads schema:url 'https://www.ibs.it/quinta-stagione-terra-spezzata-vol-libro-n-k-jemisin/e/9788804710288?srsltid=AfmBOoqXofFmIOLBBVZNA0Jf6STCDMdNaSutfGXGGOEJ95oQ5jPqgmfQ' .
+

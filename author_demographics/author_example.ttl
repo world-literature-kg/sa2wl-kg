@@ -1,0 +1,35 @@
+@prefix : <https://purl.archive.org/domain/urwriters#> .
+@prefix cc: <http://web.resource.org/cc/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pim: <https://purl.archive.org/people-and-media#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix urb: <https://purl.archive.org/domain/urbooks#> .
+@prefix urw: <https://purl.archive.org/domain/urwriters#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <https://purl.archive.org/domain/urwriters#> .
+
+
+urw:1234 a prov:Person;
+    rdfs:label 'Nora Keita Jemisin';
+    urw:gender urw:female;
+    dul:hasRole urw:Transnational;
+    urw:yearOfBirth urw:1972;
+    urw:countryOfBirth urw:USA .
+
+urw:5678 a urw:BiographicalSituation ;
+    dul:isSettingFor urw:USA , urw:1972 , urw:Transnational , urw:female , urw:artist1234 ;
+    prov:wasDerivedFrom urb:wikidata
+    
+urb:wikidata  schema:url  "https://www.wikidata.org/wiki/Q2427544" .
+    
