@@ -2,7 +2,7 @@
 
 ### The Google form where you can submit information
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScuNf-tGRyeE-cRziHXK3HvjZcIz9-Jc3f9edOanvaKUkdhxw/viewform?embedded=true" width="640" height="824" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
+[Add biographical information of an author](https://forms.gle/rTPj8gzwJmH9cJE36)
 
 ### Snapshot of the expected KG in turtle syntax
 <blockquote>
