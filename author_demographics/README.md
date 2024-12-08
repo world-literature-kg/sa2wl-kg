@@ -1,7 +1,10 @@
 
 
+### The Google form where you can submit information
 
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScuNf-tGRyeE-cRziHXK3HvjZcIz9-Jc3f9edOanvaKUkdhxw/viewform?embedded=true" width="640" height="824" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
 
+### Snapshot of the expected KG in turtle syntax
 <blockquote>
 urw:1234 a prov:Person;<br>
 &nbsp;&nbsp;&nbsp;&nbsp; rdfs:label 'Nora Keita Jemisin';<br>
@@ -17,4 +20,6 @@ urw:5678 a urw:BiographicalSituation ;<br>
 urb:wikidata  schema:url  "https://www.wikidata.org/wiki/Q2427544" .<br>
 </blockquote>
 
+
+### Graphical representation of the KG snapshot 
 ![the snapshot of a pattern that represents the author demographics](author_demographic.png)
