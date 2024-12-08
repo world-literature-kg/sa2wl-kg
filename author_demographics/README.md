@@ -16,3 +16,5 @@ urw:5678 a urw:BiographicalSituation ;<br>
     
 urb:wikidata  schema:url  "https://www.wikidata.org/wiki/Q2427544" .<br>
 </blockquote>
+
+![the snapshot of a pattern that represents the author demographics](author_demographic.png)
