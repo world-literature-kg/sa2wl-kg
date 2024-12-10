@@ -19,15 +19,18 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @base <https://purl.archive.org/domain/urwriters#> .
 
+urw:5678 a frbr:Expression;
+    prov:wasAttributedTo urw:1234;
+    urw:geographicalSubject urw:USA .
 
 urw:1234 a prov:Person;
     rdfs:label 'Nora Keita Jemisin';
-    urw:authorTopic urb:speculative-fiction .
+    urw:authorTopic urb:USA .
 
 urb:goodreads-tags a fabio:Folksonomy;
-    urb:userGeneratedSubject urb:speculative-fiction .
+    urb:userGeneratedSubject urb:USA .
     
-urb:sci-fi a urb:subject;
+urb:USA a urb:subject;
     prov:wasDerivedFrom urb:goodreads .
 
 urb:goodreads schema:url "https://www.goodreads.com/genres/speculative-fiction"
