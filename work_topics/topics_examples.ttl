@@ -30,7 +30,7 @@ urw:1234 a prov:Person;
 urb:goodreads-tags a fabio:Folksonomy;
     urb:userGeneratedSubject urb:USA .
     
-urb:USA a urb:subject;
+urb:USA a urb:Subject;
     prov:wasDerivedFrom urb:goodreads .
 
 urb:goodreads schema:url "https://www.goodreads.com/genres/speculative-fiction"
