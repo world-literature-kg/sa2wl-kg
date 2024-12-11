@@ -29,16 +29,16 @@ urb:1234 a frbr:Expression;
     
 urb:7890 a urb:Publication;
     urb:hasParticipant urb:5-season, urw:jemisin, urw:mantovani, urb:author, urb:translator .
-    prov:wasDerivedFrom urb:goodreads .
+    prov:wasDerivedFrom urb:ibs .
 
 urw:jemisin a urw:Person;
     rdfs:label "N. K. Jemisin" ;
     dul:role urb:author .
 
-urw:jemisin a urw:Person;
+urw:mantovani a urw:Person;
     rdfs:label "Alba Mantovani" ;
     dul:role urb:translator .
 
 
-urb:goodreads schema:url 'https://www.ibs.it/quinta-stagione-terra-spezzata-vol-libro-n-k-jemisin/e/9788804710288?srsltid=AfmBOoqXofFmIOLBBVZNA0Jf6STCDMdNaSutfGXGGOEJ95oQ5jPqgmfQ' .
+urb:ibs schema:url 'https://www.ibs.it/quinta-stagione-terra-spezzata-vol-libro-n-k-jemisin/e/9788804710288?srsltid=AfmBOoqXofFmIOLBBVZNA0Jf6STCDMdNaSutfGXGGOEJ95oQ5jPqgmfQ' .
 
