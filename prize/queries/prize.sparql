@@ -11,17 +11,20 @@ PREFIX ex: <http://example.org/author#>
 PREFIX urb: <http://purl.archive.org/urbooks#>
 
 CONSTRUCT {
-    ?author a prov:Person;
+    ?bauthor a prov:Person;
         rdfs:label ?name;
         dul:hasRole ?role;
-        urb:received ?prize.
-    ?prize a urw:Prize;
+        urb:received ?bprize.
+
+    ?bprize a urw:Prize;
         rdfs:label ?prizeName;
         prov:wasDerivedFrom ?source.
-    ?prizeGiving a urb:PrizeGiving;
+
+    ?bprizeGiving a urb:PrizeGiving;
         rdfs:label ?prizeEdition;
-        dul:isSettingFor ?prize , ?author , urw:awarded ;
+        dul:isSettingFor ?bprize , ?bauthor , urw:awarded ;
         prov:wasDerivedFrom ?source.
+
     ?source schema:url ?url.
 } WHERE {
     # Lettura dei dati dal file CSV
@@ -34,9 +37,9 @@ CONSTRUCT {
     }
 
     # URI univoci per gli autori e i premi
-    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?name))) AS ?author) .
-    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prize))) AS ?prize) .
-    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prizeEdition))) AS ?prizeGiving) .
-    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?src) )) AS ?source) .
+    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?name))) AS ?bauthor) .
+    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prizeName))) AS ?bprize) .
+    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prizeEdition))) AS ?bprizeGiving) .
+    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?url) )) AS ?source) .
 
 }
