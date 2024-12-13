@@ -9,33 +9,34 @@ PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX urw: <https://purl.archive.org/urwriters#>
 PREFIX ex: <http://example.org/author#>
 PREFIX urb: <http://purl.archive.org/urbooks#>
-PREFIX urb: <https://purl.archive.org/urbooks#>
 
 CONSTRUCT {
-  ?author a prov:Person;
-          rdfs:label ?name;
-          dul:hasRole ?role;
-          urb:received ?prize.
-  ?prize a urw:Prize;
-         rdfs:label ?prizeName;
-         prov:wasDerivedFrom ?source.
-  ?prizeGiving a urb:PrizeGiving;
+    ?author a prov:Person;
+        rdfs:label ?name;
+        dul:hasRole ?role;
+        urb:received ?prize.
+    ?prize a urw:Prize;
+        rdfs:label ?prizeName;
+        prov:wasDerivedFrom ?source.
+    ?prizeGiving a urb:PrizeGiving;
         rdfs:label ?prizeEdition;
         dul:isSettingFor ?prize , ?author , urw:awarded ;
-    prov:wasDerivedFrom ?source.
-  ?source schema:url ?url.
+        prov:wasDerivedFrom ?source.
+    ?source schema:url ?url.
 } WHERE {
-  # Lettura dei dati dal file CSV
-  SERVICE <x-sparql-anything:csv.headers=true,location=../data/prize_data.csv> {
-    [] xyz:Author ?name;
-       xyz:PrizeName ?prizeName;
-       xyz:PrizeEdition ?prizeEdition;
-       xyz:Role ?role;
-       xyz:Source ?url.
-  }
+    # Lettura dei dati dal file CSV
+    SERVICE <x-sparql-anything:csv.headers=true,location=../data/prize_data.csv> {
+        [] xyz:Author ?name;
+            xyz:PrizeName ?prizeName;
+            xyz:PrizeEdition ?prizeEdition;
+            xyz:Role ?role;
+            xyz:Source ?url.
+    }
 
-  # URI univoci per gli autori e i premi
-  BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?name))) AS ?author).
-  BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prizeEdition))) AS ?prizeGiving).
-  BIND (IRI(CONCAT(STR(urb:), ENCODE_FOR_URI(?src) )) AS ?source) .
+    # URI univoci per gli autori e i premi
+    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?name))) AS ?author) .
+    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prize))) AS ?prize) .
+    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prizeEdition))) AS ?prizeGiving) .
+    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?src) )) AS ?source) .
+
 }
