@@ -1,16 +1,38 @@
+PREFIX fx: <http://sparql.xyz/facade-x/ns/>
 PREFIX xyz: <http://sparql.xyz/facade-x/data/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX fx: <http://sparql.xyz/facade-x/ns/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX urp: <http://purl.archive.org/prizes#>
+PREFIX ex: <http://example.org/>
+PREFIX urb: <http://purl.archive.org/urbooks#>
 
-SELECT ?seriesName
-WHERE {
+CONSTRUCT {
+  ?author a prov:Person;
+          rdfs:label ?name;
+          dul:hasRole ?role;
+          urb:received ?prize.
+  ?prize a urp:Prize;
+         rdfs:label ?prizeName;
+         urp:edition ?prizeEdition;
+         dul:isAwardedTo ?author;
+         prov:wasDerivedFrom ?source.
+  ?source schema:url ?url.
+} WHERE {
+  # Lettura dei dati dal file CSV
+  SERVICE <x-sparql-anything:csv.headers=true,location=../data/prize_data.csv> {
+    [] xyz:Author ?name;
+       xyz:PrizeName ?prizeName;
+       xyz:PrizeEdition ?prizeEdition;
+       xyz:Role ?role;
+       xyz:Source ?url.
+  }
 
-    SERVICE <x-sparql-anything:> {
-        fx:properties fx:location "https://sparql-anything.cc/example1.json" .
-        ?tvSeries xyz:name ?seriesName .
-        ?tvSeries xyz:stars ?star .
-        ?star fx:anySlot "Courteney Cox" .
-    }
-
+  # URI univoci per gli autori e i premi
+  BIND (IRI(CONCAT(STR(ex:), "author/", ENCODE_FOR_URI(?name))) AS ?author).
+  BIND (IRI(CONCAT(STR(ex:), "prize/", ENCODE_FOR_URI(?prizeName), "-", ENCODE_FOR_URI(?prizeEdition))) AS ?prize).
+  BIND (IRI(CONCAT(STR(ex:), "source/", ENCODE_FOR_URI(?url))) AS ?source).
 }
-
