@@ -6,20 +6,23 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
-PREFIX urp: <http://purl.archive.org/prizes#>
-PREFIX ex: <http://example.org/>
+PREFIX urw: <https://purl.archive.org/urwriters#>
+PREFIX ex: <http://example.org/author#>
 PREFIX urb: <http://purl.archive.org/urbooks#>
+PREFIX urb: <https://purl.archive.org/urbooks#>
 
 CONSTRUCT {
   ?author a prov:Person;
           rdfs:label ?name;
           dul:hasRole ?role;
           urb:received ?prize.
-  ?prize a urp:Prize;
+  ?prize a urw:Prize;
          rdfs:label ?prizeName;
-         urp:edition ?prizeEdition;
-         dul:isAwardedTo ?author;
          prov:wasDerivedFrom ?source.
+  ?prizeGiving a urb:PrizeGiving;
+        rdfs:label ?prizeEdition;
+        dul:isSettingFor ?prize , ?author , urw:awarded ;
+    prov:wasDerivedFrom ?source.
   ?source schema:url ?url.
 } WHERE {
   # Lettura dei dati dal file CSV
@@ -32,7 +35,7 @@ CONSTRUCT {
   }
 
   # URI univoci per gli autori e i premi
-  BIND (IRI(CONCAT(STR(ex:), "author/", ENCODE_FOR_URI(?name))) AS ?author).
-  BIND (IRI(CONCAT(STR(ex:), "prize/", ENCODE_FOR_URI(?prizeName), "-", ENCODE_FOR_URI(?prizeEdition))) AS ?prize).
-  BIND (IRI(CONCAT(STR(ex:), "source/", ENCODE_FOR_URI(?url))) AS ?source).
+  BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?name))) AS ?author).
+  BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prizeEdition))) AS ?prizeGiving).
+  BIND (IRI(CONCAT(STR(urb:), ENCODE_FOR_URI(?src) )) AS ?source) .
 }
