@@ -13,7 +13,7 @@ PREFIX urb: <http://purl.archive.org/urbooks#>
 CONSTRUCT {
     ?bauthor a prov:Person;
         rdfs:label ?name;
-        dul:hasRole ?role;
+        dul:hasRole ?roleproc;
         urb:received ?bprize.
 
     ?bprize a urw:Prize;
@@ -37,9 +37,9 @@ CONSTRUCT {
     }
 
     # URI univoci per gli autori e i premi
-    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?name))) AS ?bauthor) .
-    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prizeName))) AS ?bprize) .
-    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?prizeEdition))) AS ?bprizeGiving) .
-    BIND (IRI(CONCAT(STR(ex:), ENCODE_FOR_URI(?url) )) AS ?source) .
-
+    BIND (IRI(CONCAT(STR(urw:), "artist-", REPLACE(?name, " ", "-"))) AS ?bauthor) .
+    BIND (IRI(CONCAT(STR(urw:), REPLACE(?prizeName, " ", "-"))) AS ?bprize) .
+    BIND (IRI(CONCAT(STR(urw:), REPLACE(?prizeEdition, " ", "-"))) AS ?bprizeGiving) .
+    BIND (IRI(CONCAT(STR(urb:), "website" )) AS ?source) .
+    BIND (IF(?role = "Awarded", IRI(urw:awarded), IRI(urw:nominated)) AS ?roleproc)
 }

@@ -10,12 +10,20 @@
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 @prefix xyz:    <http://sparql.xyz/facade-x/data/> .
 
-<http://example.org/author#Donatella%20Di%20Pietrantonio>
-        rdf:type     prov:Person ;
-        rdfs:label   "Donatella Di Pietrantonio" ;
-        dul:hasRole  "Awarded" .
+urw:Premio-Strega  rdf:type  urw:Prize ;
+        rdfs:label           "Premio Strega" ;
+        prov:wasDerivedFrom  urb:website .
 
-<http://example.org/author#Premio%20Strega%202024>
-        rdf:type          urb:PrizeGiving ;
-        rdfs:label        "Premio Strega 2024" ;
-        dul:isSettingFor  urw:awarded , <http://example.org/author#Donatella%20Di%20Pietrantonio> .
+urw:Premio-Strega-2024
+        rdf:type             urb:PrizeGiving ;
+        rdfs:label           "Premio Strega 2024" ;
+        dul:isSettingFor     urw:awarded , urw:artist-Donatella-Di-Pietrantonio , urw:Premio-Strega ;
+        prov:wasDerivedFrom  urb:website .
+
+urb:website  schema:url  "https://premiostrega.it/PS/" .
+
+urw:artist-Donatella-Di-Pietrantonio
+        rdf:type      prov:Person ;
+        rdfs:label    "Donatella Di Pietrantonio" ;
+        urb:received  urw:Premio-Strega ;
+        dul:hasRole   urw:awarded .
