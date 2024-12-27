@@ -24,7 +24,7 @@ CONSTRUCT {
 
 } WHERE {
   # Artists from the Tate Gallery open data!
-  SERVICE <x-sparql-anything:csv.headers=true,location=./data/author_data.csv> {
+  SERVICE <x-sparql-anything:csv.headers=true,location=./data/work_roles_data.csv> {
     []  xyz:id ?id;
 	    xyz:name ?name;   
   	  xyz:gender ?gender; 
@@ -44,6 +44,3 @@ CONSTRUCT {
   BIND (IRI(CONCAT(STR(urw:), ?situation )) AS ?sit) .
   BIND (IRI(CONCAT(STR(urb:), ?src )) AS ?source) .
 }
-
-
-
