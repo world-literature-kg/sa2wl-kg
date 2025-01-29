@@ -1,0 +1,45 @@
+PREFIX fx: <http://sparql.xyz/facade-x/ns/>
+PREFIX xyz: <http://sparql.xyz/facade-x/data/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX urw: <https://purl.archive.org/urwriters#>
+PREFIX ex: <http://example.org/author#>
+PREFIX urb: <http://purl.archive.org/urbooks#>
+
+CONSTRUCT {
+    ?bauthor a prov:Person;
+        rdfs:label ?name;
+        dul:hasRole ?roleproc;
+        urb:received ?bprize.
+
+    ?bprize a urw:Prize;
+        rdfs:label ?prizeName;
+        prov:wasDerivedFrom ?source.
+
+    ?bprizeGiving a urb:PrizeGiving;
+        rdfs:label ?prizeEdition;
+        dul:isSettingFor ?bprize , ?bauthor , urw:awarded ;
+        prov:wasDerivedFrom ?source.
+
+    ?source schema:url ?url.
+} WHERE {
+    # Lettura dei dati dal file CSV
+    SERVICE <x-sparql-anything:csv.headers=true,location=../data/prize_data.csv> {
+        [] xyz:Author ?name;
+            xyz:PrizeName ?prizeName;
+            xyz:PrizeEdition ?prizeEdition;
+            xyz:Role ?role;
+            xyz:Source ?url.
+    }
+
+    # URI univoci per gli autori e i premi
+    BIND (IRI(CONCAT(STR(urw:), "artist-", REPLACE(?name, " ", "-"))) AS ?bauthor) .
+    BIND (IRI(CONCAT(STR(urw:), REPLACE(?prizeName, " ", "-"))) AS ?bprize) .
+    BIND (IRI(CONCAT(STR(urw:), REPLACE(?prizeEdition, " ", "-"))) AS ?bprizeGiving) .
+    BIND (IRI(CONCAT(STR(urb:), "website" )) AS ?source) .
+    BIND (IF(?role = "Awarded", IRI(urw:awarded), IRI(urw:nominated)) AS ?roleproc)
+}

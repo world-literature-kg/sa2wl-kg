@@ -1,0 +1,29 @@
+@prefix dul:    <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix ex:     <http://example.org/author#> .
+@prefix fx:     <http://sparql.xyz/facade-x/ns/> .
+@prefix prov:   <http://www.w3.org/ns/prov#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix urb:    <http://purl.archive.org/urbooks#> .
+@prefix urw:    <https://purl.archive.org/urwriters#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix xyz:    <http://sparql.xyz/facade-x/data/> .
+
+urw:Premio-Strega  rdf:type  urw:Prize ;
+        rdfs:label           "Premio Strega" ;
+        prov:wasDerivedFrom  urb:website .
+
+urw:Premio-Strega-2024
+        rdf:type             urb:PrizeGiving ;
+        rdfs:label           "Premio Strega 2024" ;
+        dul:isSettingFor     urw:awarded , urw:artist-Donatella-Di-Pietrantonio , urw:Premio-Strega ;
+        prov:wasDerivedFrom  urb:website .
+
+urb:website  schema:url  "https://premiostrega.it/PS/" .
+
+urw:artist-Donatella-Di-Pietrantonio
+        rdf:type      prov:Person ;
+        rdfs:label    "Donatella Di Pietrantonio" ;
+        urb:received  urw:Premio-Strega ;
+        dul:hasRole   urw:awarded .
