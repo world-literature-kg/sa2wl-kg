@@ -1,0 +1,59 @@
+PREFIX fx: <http://sparql.xyz/facade-x/ns/>
+PREFIX xyz: <http://sparql.xyz/facade-x/data/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX urb: <http://purl.archive.org/urbooks#>
+PREFIX urw: <http://purl.archive.org/urwriters#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX frbr: <http://purl.org/vocab/frbr/core#>
+
+CONSTRUCT {
+  ?edition a urb:Edition;
+  	rdfs:label ?titolo;
+	  frbr:isEmbodimentOf ?nomeautore .
+
+  ?exp a frbr:Expression;
+      prov:wasAttributedTo ?autore .
+
+  ?pub a frbr:Publication;
+      urb:hasParticipant ?edition, ?autore, ?traduttore ;
+     prov:wasDerivedFrom ?source .
+
+  ?author a urw:Person;
+      rdfs:label ?nomeautore;
+      dul:role urb:author .
+
+  ?translator a urw:Person;
+      rdfs:label ?nometraduttore;
+      dul:role urb:translator .
+
+  ?source a frbr:Source;
+      schema:url ?url .
+
+  ?source schema:url ?url .
+
+}
+WHERE {
+    SERVICE<x-sparql-anything:location=C:\Users\Flavi\modsem\sa2wl-kg-acciughina\data\works_role.csv,csv.headers=true>
+    {
+      [] xyz:autore ?autore ;
+            xyz:edizione ?edizione ;
+            xyz:idpub ?id;
+            xyz:nomeautore ?nomeautore;
+            xyz:nometraduttore ?nometraduttore;
+            xyz:titolo ?titolo;
+            xyz:traduttore ?traduttore;
+          xyz:url ?url .
+    }
+    BIND (IRI(CONCAT(STR(urb:), ?titolo)) AS ?edition ) .
+    BIND (IRI(CONCAT(STR(urb:), ?autore)) AS ?exp ) .
+    BIND (IRI(CONCAT(STR(urb:), ?id)) AS ?pub ) .
+    BIND (IRI(CONCAT(STR(urw:), ?autore)) AS ?author ) .
+    BIND (IRI(CONCAT(STR(urw:), ?traduttore)) AS ?translator ) .
+    BIND (IRI(CONCAT(STR(schema:), "ibs")) AS ?source ) .
+
+}
