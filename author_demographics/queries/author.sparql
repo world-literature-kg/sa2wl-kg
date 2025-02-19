@@ -11,15 +11,19 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
 
 CONSTRUCT {
-  ?writer a prov:Person;
-  	rdfs:label ?name;
-	  urw:gender ?wgender;
-	  dul:hasRole ?wrole;
-	  urw:yearOfBirth ?wyob;
-	  urw:countryOfBirth ?wcob .
+  ?writer a prov:Person.
+  ?writer rdfs:label ?name.
+	?writer  urw:gender ?wgender.
+	?writer  dul:hasRole ?wrole.
+	 ?writer urw:yearOfBirth ?wyob.
+	 ?writer urw:countryOfBirth ?wcob .
   ?sit a urw:BiographicalSituation;
-    dul:isSettingFor ?writer , ?wgender , ?wrole , ?wyob , ?wcob ;
-    prov:wasDerivedFrom ?source .
+   ?sit dul:isSettingFor ?writer .
+    ?sit dul:isSettingFor ?wgender.
+   ?sit dul:isSettingFor  ?wrole.
+   ?sit dul:isSettingFor ?wyob.
+   ?sit dul:isSettingFor ?wcob .
+  ?sit  prov:wasDerivedFrom ?source .
   ?source schema:url ?url .
 
 } WHERE {
